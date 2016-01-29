@@ -1,0 +1,29 @@
+<html>
+     <head>
+     </head>
+     <body>
+     	<p>Welcome To my chat room</p>
+     	<ul id="messages"></ul>
+	    <form action="">
+	      <input id="m" autocomplete="off" /><button>Send</button>
+	    </form>
+	    
+     	<script src="https://cdn.socket.io/socket.io-1.4.4.js"></script>
+     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script>  
+		          var socket = io('http://localhost:3000');
+		          $('form').submit(function(e){
+		          	    e.preventDefault();
+					    socket.emit('chat-in', $('#m').val());
+					    $('#m').val('');
+					    return false;
+				  });
+				 
+				  socket.on('chat-out', function (data) {
+				        
+				         console.log(data);
+				  });
+				  
+		</script>
+     </body>
+</html>
